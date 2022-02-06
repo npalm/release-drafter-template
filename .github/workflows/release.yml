@@ -1,0 +1,19 @@
+name: Release
+
+permissions: write-all
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Set initial version or override calculated version. Use the following convention for the version: v<major>.<minor>.<patch>"
+        required: false
+  schedule:
+    - cron: "22 2 * * *" # run release flow daily
+
+jobs:
+  release:
+    name: Release
+    uses: ./.github/workflows/template-release.yml
+    with:
+      version: ${{ github.event.inputs.version }}
