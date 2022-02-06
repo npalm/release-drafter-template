@@ -37,6 +37,7 @@ jobs:
           echo "::set-output name=major::${major}"
 
       - uses: release-drafter/release-drafter@master
+        id: release
         if: ${{ steps.release.outputs.is_release }}
         with:
           version: ${{ steps.version.outputs.version }}
